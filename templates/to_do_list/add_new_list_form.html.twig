@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include "to_do_list/navbar_to_do_list.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+    <section style="background-color: #3da2c3;">
+
+
+
+
+
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+
+                        <div class="card-body p-4">
+
+                            <p class="mb-2"><span class="h2 me-2">Add new To Do List</span> </p>
+                            <form class="d-flex justify-content-center align-items-center mb-4" method="post">
+                                <div class="form-outline flex-fill">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            </form>
+
+                            <div class="divider d-flex align-items-center my-4">
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
