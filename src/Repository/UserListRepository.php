@@ -11,7 +11,6 @@ class UserListRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserList::class);
-
     }
 
     public function save(UserList $userList): void

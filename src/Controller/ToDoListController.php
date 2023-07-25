@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ToDoList;
 use App\Service\ToDoItemService;
-use App\Service\ToDoListService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,27 +12,26 @@ class ToDoListController extends AbstractController
 {
 
     public function __construct(
-        private readonly ToDoListService $toDoListService,
-    )
-    {
+        private readonly ToDoItemService $toDoItemService
+    ) {
     }
 
 
-
-
-    #[Route('/delete/{id}', name: 'delete_list')]
-    public function deleteList(int $id): Response
+    #[Route('/end-task/{id}/{status}', name: 'end_task')]
+    public function endTask(int $id, string $status): Response
     {
-        $this->toDoListService->deleteToDoList($id);
-        return $this->redirectToRoute('add_list');
+        $status = $status === 'true';
+        $this->toDoItemService->endTask($id, $status);
+        return $this->json(['success' => true]);
     }
 
 
-    #[Route('/add_user/{id}', name: 'add_user')]
-    public function addUser(Request $request, int $id): Response
+    #[Route('/add-task', name: 'add_task')]
+    public function addTask(Request $request): Response
     {
-        $this->toDoListService->addNewUserToAccessList($request->get('user_id'), $id);
-        return $this->redirectToRoute('add_list');
+        $data = json_decode($request->getContent(), true);
+        $this->toDoItemService->addTask($data['list_id'], $data['task_name']);
+        return $this->json(['success' => true]);
     }
 
 }

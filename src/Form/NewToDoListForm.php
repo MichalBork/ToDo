@@ -25,7 +25,6 @@ class NewToDoListForm extends AbstractType
                     "class" => "btn btn-primary btn-lg ms-2"
                 ]
             ]);
-
     }
 
 }

@@ -17,8 +17,7 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class)
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

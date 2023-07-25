@@ -14,10 +14,9 @@ class ToDoListService
 
     public function __construct(
         protected UserListRepository $userList,
-        protected UserRepository     $userRepository,
+        protected UserRepository $userRepository,
         protected ToDoListRepository $toDoList
-    )
-    {
+    ) {
     }
 
     public function getToDoList(int $userId): array
@@ -36,8 +35,6 @@ class ToDoListService
         $this->toDoList->save($toDoList);
 
         $this->addNewUserToAccessList($userId, $toDoList->getId());
-
-
     }
 
 
@@ -61,6 +58,11 @@ class ToDoListService
 
             $this->userList->save($userList);
         }
+    }
+
+    public function getListById(int $listId): ?array
+    {
+        return $this->toDoList->findBy(['id' => $listId]);
     }
 
 

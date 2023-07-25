@@ -29,6 +29,63 @@ class ListItem
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\ToDoList", inversedBy="items")
      */
-    private $list;
+    private mixed $list;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDone(): bool
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param bool $done
+     */
+    public function setDone(bool $done): void
+    {
+        $this->done = $done;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getList(): mixed
+    {
+        return $this->list;
+    }
+
+    /**
+     * @param mixed $list
+     */
+    public function setList(mixed $list): void
+    {
+        $this->list = $list;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 
 }

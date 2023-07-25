@@ -1,96 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block navbar %}
-{% include "to_do_list/navbar_to_do_list.html.twig" %}
+    {% include "to_do_list/navbar_to_do_list.html.twig" %}
 {% endblock %}
 
 
-
 {% block body %}
-<section style="background-color: #3da2c3;">
+    <section >
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-8 col-xl-6">
+                    <div class="card rounded-3">
+                        <div class="card-body p-4">
+                            <p class="mb-2"><span class="h2 me-2">{{ list[0].name }}</span></p>
+                            <p class="text-muted pb-2">{{ list[0].createdAt|date('Y-m-d H:i') }}</p>
+                            <form class="d-flex align-items-center mb-4" method="post">
+                                <div class="form-outline flex-fill d-flex align-items-center">
+                                    {{ form_widget(form.task, {'attr': {'placeholder': 'Add new task'}}) }}
+                                    {{ form_row(form._token) }}
+                                    {{ form_widget(form.save) }}
+                                </div>
+                            </form>
+
+                            <ul class="list-group rounded-0">
+                                {% for item in items %}
+                                    <li class="list-group-item border-0 d-flex align-items-center ps-0">
+                                        <input class="form-check-input me-3 task-checkbox" type="checkbox"
+                                               id="{{ item.id }}" aria-label="..."
+                                               {% if item.done %}checked{% endif %} />
+                                        {% if item.done %}
+                                            <s class="item-name">{{ item.name }}</s>
+                                        {% else %}
+                                            <span class="item-name">{{ item.name }}</span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+
+
+                            </ul>
 
 
 
-
-
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-lg-8 col-xl-6">
-                <div class="card rounded-3">
-
-                    <div class="card-body p-4">
-
-                        <p class="mb-2"><span class="h2 me-2">Team Meeting</span> <span
-                                    class="badge bg-danger">checklist</span></p>
-                        <p class="text-muted pb-2">04/01/2020 • ML - 1321</p>
-                        <form class="d-flex justify-content-center align-items-center mb-4">
-                            <div class="form-outline flex-fill">
-                                <input type="text" id="form3" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3">What do you need to do today?</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg ms-2">Add</button>
-                        </form>
-                        <ul class="list-group rounded-0">
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." checked />
-                                <s>Task list and assignments</s>
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                                Set due date and assignments
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                                Remove duplicate tasks and stories
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                                Update the userflow and stories
-                            </li>
-                            <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                                <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                                Adjust the components
-                            </li>
-                        </ul>
-
-                        <div class="divider d-flex align-items-center my-4">
-                            <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Shared with</p>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 {% endblock %}
