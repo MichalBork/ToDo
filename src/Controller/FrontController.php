@@ -79,11 +79,13 @@ class FrontController extends AbstractController
             $data = $form->getData();
 
             $this->toDoItemService->addTask($id, $data['task']);
+
+            $this->addFlash('success', 'Task successfully added.');
+
+            return $this->redirectToRoute('show_list', ['id' => $id]);
         }
 
-
         list($list, $items) = $this->getListForUser($id);
-
 
         return $this->render(
             'to_do_list/to_do_list.html.twig',
@@ -95,6 +97,7 @@ class FrontController extends AbstractController
             ]
         );
     }
+
 
     /**
      * @param int $id
