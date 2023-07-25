@@ -38,13 +38,6 @@ class ToDoListService
     }
 
 
-    public function deleteToDoList(int $listId): void
-    {
-        $toDoList = $this->toDoList->findOneBy(['id' => $listId]);
-        $this->toDoList->delete($toDoList);
-    }
-
-
     public function addNewUserToAccessList(int $userId, int $listId): void
     {
         $userList = new UserList();
@@ -63,6 +56,18 @@ class ToDoListService
     public function getListById(int $listId): ?array
     {
         return $this->toDoList->findBy(['id' => $listId]);
+    }
+
+
+    public function getListWithUnFinishedTasksAndOlderThanWeek(): ?array
+    {
+        return $this->toDoList->getListWithUnFinishedTasksAndOlderThanWeek();
+    }
+
+
+    public function getUserForList(int $listId): ?array
+    {
+        return $this->userList->findBy(['list' => $listId]);
     }
 
 

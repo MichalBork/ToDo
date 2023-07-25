@@ -27,4 +27,18 @@ class ToDoListRepository extends ServiceEntityRepository
     }
 
 
+    public function getListWithUnFinishedTasksAndOlderThanWeek(): ?array
+    {
+        return $this->createQueryBuilder('l')
+            ->select('l.name, l.createdAt', 'l.id')
+            ->leftJoin('l.items', 'i', 'WITH', 'i.done = false')
+            ->groupBy('l.id')
+            ->having('COUNT(i.id) > 0')
+            ->andWhere('l.createdAt < :weekAgo')
+            ->setParameter('weekAgo', time() - 604800)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 }
